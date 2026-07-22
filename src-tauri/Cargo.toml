@@ -5,7 +5,7 @@ description = "Electrical Schemes Editor"
 authors = ["Nibin Naug"]
 license = "GPL-3.0-or-later"
 repository = "https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor"
-homepage = "https://nibin.naug.free.fr/prog/ese/"
+homepage = "https://nibin-naug.pages-perso.free.fr/prog/ese/"
 edition = "2021"
 
 [lib]

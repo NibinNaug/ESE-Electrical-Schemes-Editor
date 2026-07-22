@@ -5,7 +5,7 @@
   "description": "Turn static electrical schematics into interactive, portable documents.",
   "author": "Nibin Naug",
   "license": "GPL-3.0-or-later",
-  "homepage": "https://nibin.naug.free.fr/prog/ese/",
+  "homepage": "https://nibin-naug.pages-perso.free.fr/prog/ese/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor.git"

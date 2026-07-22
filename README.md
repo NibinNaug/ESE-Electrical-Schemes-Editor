@@ -8,7 +8,7 @@
 
 An open, portable and cross-platform-oriented editor for turning static electrical schematics into interactive documents. ESE overlays editable circuits on source images without altering them, then saves the complete project in a transparent `.ese` archive or exports it as a standalone HTML file.
 
-[Site officiel et téléchargements](https://nibin.naug.free.fr/prog/ese/) · [Official website and downloads](https://nibin.naug.free.fr/prog/ese/)
+[Site officiel et téléchargements](https://nibin-naug.pages-perso.free.fr/prog/ese/) · [Official website and downloads](https://nibin-naug.pages-perso.free.fr/prog/ese/)
 
 [Français](#français) · [English](#english)
 
