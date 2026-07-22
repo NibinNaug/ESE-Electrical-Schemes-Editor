@@ -2,6 +2,17 @@
 
 All notable public changes to ESE are documented here.
 
+## Unreleased
+
+## [0.1.0-beta.2] — 2026-07-23
+
+First OTA-capable public beta.
+
+- secure in-app update checks for published GitHub releases;
+- signed Tauri updates for Windows and Linux with automatic restart;
+- Android APK download, SHA-256 verification and handoff to the system installer;
+- repeatable GitHub Actions release pipeline for desktop and Android artefacts.
+
 ## [0.1.0-beta.1] — 2026-07-22
 
 First public beta.
@@ -20,3 +31,4 @@ First public beta.
 - no bundled schematic, manual or mandatory online service.
 
 [0.1.0-beta.1]: https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/tag/v0.1.0-beta.1
+[0.1.0-beta.2]: https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/tag/v0.1.0-beta.2

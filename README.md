@@ -22,16 +22,19 @@ ESE — **Electrical Schemes Editor** — permet de transformer l’image d’un
 
 Le lecteur et l’éditeur partagent volontairement la même interface : la case **Mode édition** affiche ou masque les outils sans changer de document ni perdre la sélection en cours.
 
-La première version publique est `0.1.0-beta.1`, disponible pour Windows x64 et Android. Un AppImage Linux x64 expérimental a également été validé sous WSLg ; sa validation sur un poste Linux réel reste à faire avant publication. Les fichiers `.ese` restent identiques et portables d’une plateforme à l’autre.
+La version publique actuelle est `0.1.0-beta.2`, disponible pour Windows x64 et Android, avec un AppImage Linux x64 expérimental. C’est la première version capable d’installer les mises à jour intégrées : les utilisateurs de `0.1.0-beta.1` doivent donc encore installer cette transition manuellement une fois. Les fichiers `.ese` restent identiques et portables d’une plateforme à l’autre.
+
+Les versions natives vérifient automatiquement les nouvelles releases GitHub. Les mises à jour Windows/Linux sont signées et installées par Tauri ; Android vérifie l’empreinte de l’APK avant de transmettre l’installation au système. Le fonctionnement et la procédure de publication sont décrits dans [docs/OTA_UPDATES.md](docs/OTA_UPDATES.md).
 
 ### Téléchargements
 
-- [Windows x64 — programme d’installation](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Setup.exe)
-- [Windows x64 — exécutable portable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Portable.exe)
-- [Android 7.0+ — APK universel](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Android-Universal.apk)
-- [Sommes de contrôle SHA-256](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/SHA256SUMS.txt)
+- [Windows x64 — programme d’installation](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Setup.exe)
+- [Windows x64 — exécutable portable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Portable.exe)
+- [Linux x64 — AppImage expérimental](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Linux-x64.AppImage)
+- [Android 7.0+ — APK universel](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Android-Universal.apk)
+- [Sommes de contrôle SHA-256](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/SHA256SUMS.txt)
 
-Les détails d’installation et limitations connues figurent dans les [notes de version](docs/RELEASE_NOTES_0.1.0-beta.1.md).
+Les détails d’installation et limitations connues figurent dans les [notes de version](docs/RELEASE_NOTES_0.1.0-beta.2.md).
 
 ### Fonctionnalités actuelles
 
@@ -243,16 +246,19 @@ Le projet privilégie un format documenté, inspectable et portable, sans chiffr
 
 ESE — **Electrical Schemes Editor** — turns an electrical schematic image into an interactive document. Circuits remain hidden while idle, appear temporarily on hover and stay highlighted after a click. Clicking the same circuit again clears the selection.
 
-The first public version is `0.1.0-beta.1`, available for Windows x64 and Android. An experimental Linux x64 AppImage has also been smoke-tested under WSLg; validation on a real Linux desktop is still required before publication. `.ese` files remain identical and portable across platforms.
+The current public version is `0.1.0-beta.2`, available for Windows x64 and Android, with an experimental Linux x64 AppImage. It is the first build able to install integrated updates, so users of `0.1.0-beta.1` still need to install this transition manually once. `.ese` files remain identical and portable across platforms.
+
+Native builds automatically check new GitHub releases. Windows/Linux updates are signed and installed through Tauri; Android verifies the APK digest before handing installation to the operating system. See [docs/OTA_UPDATES.md](docs/OTA_UPDATES.md) for the security model and release procedure.
 
 ### Downloads
 
-- [Windows x64 — installer](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Setup.exe)
-- [Windows x64 — portable executable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Portable.exe)
-- [Android 7.0+ — universal APK](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Android-Universal.apk)
-- [SHA-256 checksums](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/SHA256SUMS.txt)
+- [Windows x64 — installer](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Setup.exe)
+- [Windows x64 — portable executable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Portable.exe)
+- [Linux x64 — experimental AppImage](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Linux-x64.AppImage)
+- [Android 7.0+ — universal APK](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Android-Universal.apk)
+- [SHA-256 checksums](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/SHA256SUMS.txt)
 
-See the [release notes](docs/RELEASE_NOTES_0.1.0-beta.1.md) for installation details and known limitations.
+See the [release notes](docs/RELEASE_NOTES_0.1.0-beta.2.md) for installation details and known limitations.
 
 ### Current features
 

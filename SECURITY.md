@@ -12,4 +12,4 @@ Please include the affected platform, ESE version, reproduction steps and the mi
 
 ## Local processing
 
-Image/PDF conversion, OCR, project editing and HTML generation run locally. Network access is only used when explicitly sharing an HTML export on the local network or when the platform downloads normal runtime prerequisites. See [docs/PRIVACY.md](docs/PRIVACY.md).
+Image/PDF conversion, OCR, project editing and HTML generation run locally. Network access is used when explicitly sharing an HTML export on the local network and when ESE checks or downloads a signed release from the official GitHub repository. See [docs/PRIVACY.md](docs/PRIVACY.md) and [docs/OTA_UPDATES.md](docs/OTA_UPDATES.md).

@@ -126,6 +126,19 @@ select { padding: 5px 8px; }
 .view-controls #page-select { max-width: 220px; }
 .toolbar-separator { width: 1px; height: 24px; margin: 0 2px; background: var(--border); }
 
+.update-button { position: relative; }
+.update-button.update-available { border-color: var(--accent); }
+.update-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 .mode-switch {
   display: inline-flex;
   align-items: center;
@@ -459,6 +472,43 @@ dialog::backdrop { background: rgb(10 14 20 / 58%); }
 .compact-dialog { width: min(620px, calc(100vw - 32px)); }
 .import-destination-actions { justify-content: flex-end; flex-wrap: wrap; }
 .dialog-actions { display: flex; align-items: center; gap: 8px; }
+
+.update-dialog-body { display: grid; gap: 12px; }
+.update-dialog-body > p { margin: 0; }
+.update-version-card,
+.update-release-details > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.update-version-card {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--panel-alt);
+}
+.update-version-card span,
+.update-release-details span { color: var(--muted); font-size: 12px; }
+.update-release-details {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+}
+.update-release-details[hidden],
+.update-badge[hidden] { display: none; }
+.update-release-details p {
+  max-height: 180px;
+  margin: 4px 0;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.update-release-details a { color: var(--accent); }
+#update-progress { width: 100%; }
+.update-dialog-footer { align-items: center; }
+#update-status { flex: 1; color: var(--muted); font-size: 12px; }
 
 .pdf-import-dialog {
   width: min(1120px, calc(100vw - 32px));

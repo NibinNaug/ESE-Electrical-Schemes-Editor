@@ -43,12 +43,18 @@ class EseAndroidBridge(private val activity: MainActivity) {
   fun cleanupCameraCaptures() {
     activity.cleanupEseCameraCaptures()
   }
+
+  @JavascriptInterface
+  fun downloadAndInstallUpdate(requestId: String, url: String, sha256: String) {
+    activity.updater.downloadAndInstall(requestId, url, sha256)
+  }
 }
 
 class MainActivity : TauriActivity() {
   private var immersive = false
   private var eseWebView: WebView? = null
   internal val hotspotController by lazy { EseHotspotController(this) }
+  internal val updater by lazy { EseUpdater(this) }
   private val hotspotPermissionLauncher = registerForActivityResult(
     ActivityResultContracts.RequestPermission()
   ) { granted ->
@@ -88,6 +94,11 @@ class MainActivity : TauriActivity() {
     eseWebView?.post { eseWebView?.evaluateJavascript(script, null) }
   }
 
+  internal fun dispatchUpdateEvent(detail: JSONObject) {
+    val script = "window.dispatchEvent(new CustomEvent('ese-update', { detail: ${detail} }));"
+    eseWebView?.post { eseWebView?.evaluateJavascript(script, null) }
+  }
+
   internal fun cleanupEseCameraCaptures() {
     val pictures = getExternalFilesDir(Environment.DIRECTORY_PICTURES) ?: return
     pictures.listFiles()?.forEach { file ->
@@ -112,8 +123,14 @@ class MainActivity : TauriActivity() {
     if (hasFocus && immersive) setEseImmersive(true)
   }
 
+  override fun onResume() {
+    super.onResume()
+    updater.onResume()
+  }
+
   override fun onDestroy() {
     hotspotController.stopOwned()
+    updater.close()
     eseWebView = null
     super.onDestroy()
   }

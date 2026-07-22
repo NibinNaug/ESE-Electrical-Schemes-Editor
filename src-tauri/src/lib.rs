@@ -1,10 +1,14 @@
 use std::fs::File;
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
+#[cfg(desktop)]
+use tauri::Manager;
 use tauri_plugin_fs::{FilePath, FsExt, OpenOptions};
 
 mod recovery;
 mod share;
+#[cfg(desktop)]
+mod app_updates;
 
 #[tauri::command]
 fn read_binary(app: tauri::AppHandle, path: String) -> Result<Vec<u8>, String> {
@@ -75,6 +79,11 @@ pub fn run() {
     tauri::Builder::default()
         .manage(share::ShareManager::default())
         .setup(|_app| {
+            #[cfg(desktop)]
+            {
+                _app.handle().plugin(tauri_plugin_updater::Builder::new().build())?;
+                _app.manage(app_updates::PendingUpdate::default());
+            }
             #[cfg(target_os = "windows")]
             {
                 use tauri::Manager;
@@ -110,7 +119,11 @@ pub fn run() {
             share::share_network_capabilities,
             share::start_html_share,
             share::get_share_status,
-            share::stop_html_share
+            share::stop_html_share,
+            #[cfg(desktop)]
+            app_updates::check_desktop_update,
+            #[cfg(desktop)]
+            app_updates::install_desktop_update
         ])
         .run(tauri::generate_context!())
         .expect("ESE n’a pas pu démarrer");

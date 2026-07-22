@@ -1,0 +1,183 @@
+name: Publish ESE release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm run check:release-version
+      - run: npm test
+      - run: npm run build
+
+  desktop:
+    needs: verify
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - platform: windows-latest
+            bundles: nsis
+          - platform: ubuntu-22.04
+            bundles: appimage
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Linux build dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ./src-tauri -> target
+      - run: npm ci
+      - uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.ESE_TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+        with:
+          tagName: v__VERSION__
+          releaseName: ESE __VERSION__
+          releaseBody: Packages are being built and verified. Full notes are added when the release is published.
+          generateReleaseNotes: false
+          releaseDraft: true
+          prerelease: true
+          uploadUpdaterJson: true
+          updaterJsonPreferNsis: true
+          args: --bundles ${{ matrix.bundles }}
+      - name: Upload friendly Windows package names
+        if: matrix.platform == 'windows-latest'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $version = node -p "require('./package.json').version"
+          $setup = Get-ChildItem src-tauri/target/release/bundle/nsis -File -Filter '*-setup.exe' | Select-Object -First 1
+          if (-not $setup) { throw 'NSIS installer not found.' }
+          Copy-Item -LiteralPath $setup.FullName -Destination ESE-Windows-x64-Setup.exe
+          Copy-Item -LiteralPath src-tauri/target/release/ese.exe -Destination ESE-Windows-x64-Portable.exe
+          gh release upload "v$version" ESE-Windows-x64-Setup.exe ESE-Windows-x64-Portable.exe --clobber
+      - name: Upload friendly Linux package name
+        if: matrix.platform == 'ubuntu-22.04'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          APPIMAGE_PATH="$(find src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' | head -n 1)"
+          test -n "$APPIMAGE_PATH"
+          cp "$APPIMAGE_PATH" ESE-Linux-x64.AppImage
+          gh release upload "v$VERSION" ESE-Linux-x64.AppImage --clobber
+
+  android:
+    needs: [verify, desktop]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v4
+      - name: Install Android SDK and NDK
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ./src-tauri -> target
+      - run: npm ci
+      - name: Configure Android release signing
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ESE_ANDROID_KEYSTORE_BASE64 }}
+          KEY_ALIAS: ${{ secrets.ESE_ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ESE_ANDROID_KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.ESE_ANDROID_STORE_PASSWORD }}
+        run: |
+          test -n "$KEYSTORE_BASE64" && test -n "$KEY_ALIAS" && test -n "$KEY_PASSWORD" && test -n "$STORE_PASSWORD"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/ese-release.jks"
+          {
+            printf 'storeFile=%s\n' "$RUNNER_TEMP/ese-release.jks"
+            printf 'storePassword=%s\n' "$STORE_PASSWORD"
+            printf 'keyAlias=%s\n' "$KEY_ALIAS"
+            printf 'keyPassword=%s\n' "$KEY_PASSWORD"
+          } > src-tauri/gen/android/keystore.properties
+      - name: Build signed universal APK
+        env:
+          NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/28.2.13676358
+        run: npm run tauri android build -- --apk --ci
+      - name: Name and hash Android artifact
+        shell: bash
+        run: |
+          APK_PATH="$(find src-tauri/gen/android/app/build/outputs/apk -type f -name '*universal*release*.apk' | head -n 1)"
+          test -n "$APK_PATH"
+          cp "$APK_PATH" ESE-Android-Universal.apk
+          sha256sum ESE-Android-Universal.apk > SHA256SUMS.txt
+      - name: Upload Android artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          gh release upload "v$VERSION" ESE-Android-Universal.apk SHA256SUMS.txt --clobber
+
+  publish:
+    needs: android
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+      - name: Generate public package checksums
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          mkdir release-assets
+          gh release download "v$VERSION" --dir release-assets --pattern 'ESE-*'
+          find release-assets -maxdepth 1 -type f ! -name '*.sig' -printf '%f\n' | sort | while read -r asset; do
+            sha256sum "release-assets/$asset"
+          done | sed 's#  release-assets/#  #' > SHA256SUMS.txt
+          test -s SHA256SUMS.txt
+          gh release upload "v$VERSION" SHA256SUMS.txt --clobber
+      - name: Publish completed prerelease
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          NOTES="docs/RELEASE_NOTES_$VERSION.md"
+          test -f "$NOTES"
+          RELEASE_ID="$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" --jq ".[] | select(.tag_name == \"v$VERSION\" and .draft == true) | .id" | head -n 1)"
+          test -n "$RELEASE_ID"
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            -f name="ESE $VERSION" -F body=@"$NOTES" -F draft=false -F prerelease=true

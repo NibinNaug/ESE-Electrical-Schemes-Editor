@@ -19,6 +19,14 @@ import { mergeImportedProject } from "./project-import";
 import { clearRecoverySession, loadRecoverySession, saveRecoverySession } from "./session-recovery";
 import { moveTracePoint, moveTraceSegment, nearestTraceSegmentIndex, removeTraceById } from "./trace-edit";
 import {
+  appUpdatesSupported,
+  checkForAppUpdate,
+  getInstalledAppVersion,
+  installAppUpdate,
+  type AppUpdateInfo,
+  type AppUpdateProgress
+} from "./app-update";
+import {
   getCircuitReference,
   getLegendEntry,
   makeId,
@@ -55,6 +63,7 @@ root.innerHTML = `
         <button id="export-html" type="button">Exporter HTML</button>
         <button id="share-html" type="button">Partager par QR</button>
         <button id="export-json" type="button">Exporter JSON</button>
+        <button id="app-update" class="update-button" type="button" hidden>Mises à jour<span id="update-badge" class="update-badge" aria-label="Mise à jour disponible" hidden></span></button>
         <label class="mode-switch"><input id="edit-mode" type="checkbox"> Mode édition</label>
       </div>
     </header>
@@ -329,6 +338,35 @@ root.innerHTML = `
     </div>
   </dialog>
 
+  <dialog id="update-dialog" class="compact-dialog update-dialog">
+    <div class="dialog-header">
+      <div><h2>Mises à jour d’ESE</h2><p>Vérification sécurisée sur GitHub Releases</p></div>
+      <button id="close-update" type="button">Fermer</button>
+    </div>
+    <div class="dialog-body update-dialog-body">
+      <div class="update-version-card">
+        <span>Version installée</span>
+        <strong id="update-current-version">—</strong>
+      </div>
+      <p id="update-summary">Recherche d’une nouvelle version…</p>
+      <div id="update-release-details" class="update-release-details" hidden>
+        <div><span>Version disponible</span><strong id="update-available-version"></strong></div>
+        <div><span>Publication</span><strong id="update-published-at"></strong></div>
+        <p id="update-notes"></p>
+        <a id="update-release-link" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases" target="_blank" rel="noreferrer">Voir la release sur GitHub</a>
+      </div>
+      <progress id="update-progress" max="1" hidden></progress>
+      <p class="dialog-note" id="update-security-note">Les mises à jour desktop sont signées par la clé ESE. Android vérifie l’empreinte téléchargée, puis la signature de l’APK avant remplacement.</p>
+    </div>
+    <div class="dialog-footer update-dialog-footer">
+      <output id="update-status" aria-live="polite"></output>
+      <div class="dialog-actions">
+        <button id="check-update" type="button">Rechercher</button>
+        <button id="install-update" class="primary" type="button" hidden>Installer</button>
+      </div>
+    </div>
+  </dialog>
+
   <input id="project-file" type="file" accept=".ese,.html,.htm,application/zip,text/html" hidden>
   <input id="source-file" type="file" accept="image/*,.pdf,.html,.htm,.json,application/pdf,text/html,application/json" hidden>
   <input id="camera-file" type="file" accept="image/*" capture="environment" hidden>
@@ -447,6 +485,21 @@ const shareCounter = byId<HTMLElement>("share-counter");
 const shareBytes = byId<HTMLElement>("share-bytes");
 const shareStatus = byId<HTMLOutputElement>("share-status");
 const stopShareButton = byId<HTMLButtonElement>("stop-share");
+const appUpdateButton = byId<HTMLButtonElement>("app-update");
+const updateBadge = byId<HTMLSpanElement>("update-badge");
+const updateDialog = byId<HTMLDialogElement>("update-dialog");
+const closeUpdateButton = byId<HTMLButtonElement>("close-update");
+const checkUpdateButton = byId<HTMLButtonElement>("check-update");
+const installUpdateButton = byId<HTMLButtonElement>("install-update");
+const updateCurrentVersion = byId<HTMLElement>("update-current-version");
+const updateSummary = byId<HTMLParagraphElement>("update-summary");
+const updateReleaseDetails = byId<HTMLDivElement>("update-release-details");
+const updateAvailableVersion = byId<HTMLElement>("update-available-version");
+const updatePublishedAt = byId<HTMLElement>("update-published-at");
+const updateNotes = byId<HTMLParagraphElement>("update-notes");
+const updateReleaseLink = byId<HTMLAnchorElement>("update-release-link");
+const updateProgress = byId<HTMLProgressElement>("update-progress");
+const updateStatus = byId<HTMLOutputElement>("update-status");
 const ns = "http://www.w3.org/2000/svg";
 
 type ImportDestination = "add" | "new";
@@ -574,6 +627,8 @@ let cameraCaptureUrl: string | null = null;
 let cameraFacingMode: "environment" | "user" = "environment";
 let cameraOpening = false;
 let cameraRequestGeneration = 0;
+let availableAppUpdate: AppUpdateInfo | null = null;
+let appUpdateBusy = false;
 const undoStack: string[] = [];
 const redoStack: string[] = [];
 let recoveryReady = false;
@@ -666,6 +721,127 @@ const markSaved = (): void => {
   scheduleRecoverySession();
 };
 
+const updateProgressLabel = (progress: AppUpdateProgress): string => {
+  if (!progress.total) return progress.message;
+  const percent = Math.min(100, Math.round(progress.downloaded / progress.total * 100));
+  return `${progress.message} ${percent} %`;
+};
+
+const renderAvailableAppUpdate = (update: AppUpdateInfo | null): void => {
+  availableAppUpdate = update;
+  updateBadge.hidden = !update;
+  appUpdateButton.classList.toggle("update-available", Boolean(update));
+  appUpdateButton.title = update
+    ? `ESE ${update.version} est disponible.`
+    : "Rechercher une mise à jour d’ESE.";
+  installUpdateButton.hidden = !update;
+  updateReleaseDetails.hidden = !update;
+  if (!update) return;
+
+  updateAvailableVersion.textContent = update.version;
+  updatePublishedAt.textContent = update.publishedAt
+    ? new Date(update.publishedAt).toLocaleDateString("fr-FR", { dateStyle: "long" })
+    : "Date non fournie";
+  updateNotes.textContent = update.notes;
+  updateReleaseLink.href = update.releaseUrl;
+  installUpdateButton.textContent = update.platform === "android"
+    ? "Télécharger et installer"
+    : "Installer et redémarrer";
+};
+
+const setAppUpdateBusy = (busy: boolean): void => {
+  appUpdateBusy = busy;
+  checkUpdateButton.disabled = busy;
+  installUpdateButton.disabled = busy;
+  closeUpdateButton.disabled = busy;
+};
+
+const checkApplicationUpdate = async (manual: boolean): Promise<void> => {
+  if (appUpdateBusy || !appUpdatesSupported()) return;
+  setAppUpdateBusy(true);
+  if (manual) {
+    updateSummary.textContent = "Recherche d’une nouvelle version…";
+    updateStatus.textContent = "Connexion à GitHub Releases…";
+    updateProgress.hidden = true;
+  }
+  try {
+    const result = await checkForAppUpdate();
+    updateCurrentVersion.textContent = result.currentVersion;
+    renderAvailableAppUpdate(result.update);
+    if (result.update) {
+      updateSummary.textContent = `ESE ${result.update.version} est disponible.`;
+      updateStatus.textContent = "La mise à jour est prête à être téléchargée.";
+      setStatus(`Mise à jour ESE ${result.update.version} disponible.`);
+    } else {
+      updateSummary.textContent = "ESE est à jour.";
+      updateStatus.textContent = `Aucune version plus récente que ${result.currentVersion}.`;
+    }
+  } catch (error) {
+    if (manual) {
+      updateSummary.textContent = "La vérification a échoué.";
+      updateStatus.textContent = String(error);
+    } else {
+      console.warn("Vérification automatique des mises à jour impossible.", error);
+    }
+  } finally {
+    setAppUpdateBusy(false);
+  }
+};
+
+const openApplicationUpdate = async (): Promise<void> => {
+  if (!appUpdatesSupported()) return;
+  if (!updateDialog.open) updateDialog.showModal();
+  if (availableAppUpdate) {
+    renderAvailableAppUpdate(availableAppUpdate);
+    updateSummary.textContent = `ESE ${availableAppUpdate.version} est disponible.`;
+    updateStatus.textContent = "La mise à jour est prête à être téléchargée.";
+    return;
+  }
+  await checkApplicationUpdate(true);
+};
+
+const installAvailableAppUpdate = async (): Promise<void> => {
+  if (!availableAppUpdate || appUpdateBusy) return;
+  if (dirty && !window.confirm("Le projet contient des modifications non enregistrées. ESE va conserver une copie de récupération, mais il est préférable de les enregistrer avant la mise à jour. Continuer ?")) return;
+
+  const attemptedUpdate = availableAppUpdate;
+  setAppUpdateBusy(true);
+  updateProgress.hidden = false;
+  updateProgress.removeAttribute("value");
+  updateStatus.textContent = "Préparation de la mise à jour…";
+  try {
+    await persistRecoverySession();
+    await installAppUpdate(availableAppUpdate, (progress) => {
+      updateStatus.textContent = updateProgressLabel(progress);
+      if (progress.total) updateProgress.value = Math.min(1, progress.downloaded / progress.total);
+      else updateProgress.removeAttribute("value");
+    });
+    if (availableAppUpdate.platform === "android") {
+      updateProgress.value = 1;
+      updateStatus.textContent = "Valide maintenant le remplacement d’ESE dans l’installateur Android.";
+    }
+  } catch (error) {
+    if (attemptedUpdate.platform === "desktop") {
+      renderAvailableAppUpdate(null);
+      updateSummary.textContent = "La mise à jour doit être vérifiée à nouveau.";
+      updateStatus.textContent = `Installation impossible : ${String(error)} Relance la recherche avant de réessayer.`;
+    } else {
+      updateStatus.textContent = `Installation impossible : ${String(error)}`;
+    }
+    updateProgress.hidden = true;
+  } finally {
+    setAppUpdateBusy(false);
+  }
+};
+
+const initializeAppUpdates = async (): Promise<void> => {
+  if (!appUpdatesSupported()) return;
+  appUpdateButton.hidden = false;
+  try { updateCurrentVersion.textContent = await getInstalledAppVersion(); }
+  catch { updateCurrentVersion.textContent = "Inconnue"; }
+  window.setTimeout(() => { void checkApplicationUpdate(false); }, 4_000);
+};
+
 type EseAndroidBridge = {
   setImmersive: (enabled: boolean) => void;
   getHotspotCapabilities: () => string;
@@ -674,6 +850,7 @@ type EseAndroidBridge = {
   getPreferredIpv4: () => string;
   getHotspotClientCount: () => number;
   cleanupCameraCaptures: () => void;
+  downloadAndInstallUpdate: (requestId: string, url: string, sha256: string) => void;
 };
 
 const getAndroidBridge = (): EseAndroidBridge | undefined =>
@@ -3079,6 +3256,16 @@ const copyShareAddress = async (): Promise<void> => {
   }
 };
 
+appUpdateButton.addEventListener("click", () => { void openApplicationUpdate(); });
+checkUpdateButton.addEventListener("click", () => { void checkApplicationUpdate(true); });
+installUpdateButton.addEventListener("click", () => { void installAvailableAppUpdate(); });
+closeUpdateButton.addEventListener("click", () => {
+  if (!appUpdateBusy) updateDialog.close();
+});
+updateDialog.addEventListener("cancel", (event) => {
+  if (appUpdateBusy) event.preventDefault();
+});
+
 byId<HTMLButtonElement>("open-project").addEventListener("click", openProject);
 newProjectButton.addEventListener("click", () => { void newProject(); });
 importSourceButton.addEventListener("click", () => {
@@ -3511,4 +3698,4 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") void persistRecoverySession();
 });
 
-void initializeApplication();
+void initializeApplication().then(() => initializeAppUpdates());
