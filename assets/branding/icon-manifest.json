@@ -1,0 +1,8 @@
+{
+  "default": "ese-icon.svg",
+  "bg_color": "#0b1729",
+  "android_bg": "ese-android-background.svg",
+  "android_fg": "ese-android-foreground.svg",
+  "android_fg_scale": 100,
+  "android_monochrome": "ese-android-monochrome.svg"
+}

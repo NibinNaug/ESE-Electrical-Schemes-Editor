@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ESE — Electrical Schemes Editor : transformez vos schémas techniques en documents interactifs, portables et partageables.">
+  <meta name="theme-color" content="#101722">
+  <title>ESE — Electrical Schemes Editor</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="ESE — accueil">
+        <img src="assets/ese-icon.svg" alt="" width="42" height="42">
+        <span><strong>ESE</strong><small>Electrical Schemes Editor</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only" data-fr="Ouvrir le menu" data-en="Open menu">Ouvrir le menu</span>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
+        <a href="#features" data-fr="Fonctions" data-en="Features">Fonctions</a>
+        <a href="#downloads" data-fr="Télécharger" data-en="Download">Télécharger</a>
+        <a href="#tutorial" data-fr="Tutoriel" data-en="Tutorial">Tutoriel</a>
+        <a href="#formats" data-fr="Formats" data-en="Formats">Formats</a>
+        <a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor">GitHub</a>
+      </nav>
+      <button class="lang-toggle" type="button" aria-label="Switch to English" data-next-label-fr="Passer en français" data-next-label-en="Switch to English">EN</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">ESE · 0.1.0-beta.1</p>
+          <h1 data-fr="Donnez de la couleur aux schémas. Seulement quand elle compte." data-en="Bring colour to schematics. Only when it matters.">Donnez de la couleur aux schémas. Seulement quand elle compte.</h1>
+          <p class="lead" data-fr="Importez un plan ou un document, dessinez ses circuits, puis explorez-les au survol ou au clic. ESE produit des projets ouverts et des fichiers HTML autonomes, lisibles sans installer l’application." data-en="Import a drawing or document, trace its circuits, then explore them on hover or click. ESE creates open projects and standalone HTML files that anyone can view without installing the app.">Importez un plan ou un document, dessinez ses circuits, puis explorez-les au survol ou au clic. ESE produit des projets ouverts et des fichiers HTML autonomes, lisibles sans installer l’application.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#downloads" data-fr="Télécharger ESE" data-en="Download ESE">Télécharger ESE</a>
+            <a class="button secondary" href="#tutorial" data-fr="Voir le tutoriel" data-en="Read the tutorial">Voir le tutoriel</a>
+          </div>
+          <ul class="hero-points" aria-label="Points clés">
+            <li data-fr="Gratuit et open source" data-en="Free and open source">Gratuit et open source</li>
+            <li data-fr="Windows et Android" data-en="Windows and Android">Windows et Android</li>
+            <li data-fr="Projets .ese multiplateformes" data-en="Cross-platform .ese projects">Projets .ese multiplateformes</li>
+          </ul>
+        </div>
+        <figure class="hero-visual">
+          <img src="assets/screenshots/ese-viewer.png" alt="ESE affichant un schéma électrique interactif synthétique" width="1440" height="970">
+          <figcaption data-fr="Un circuit composé reste lisible et ne s’active que lorsque vous le choisissez." data-en="A compound circuit stays readable and is highlighted only when you choose it.">Un circuit composé reste lisible et ne s’active que lorsque vous le choisissez.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section intro">
+      <div class="shell narrow">
+        <p class="section-kicker" data-fr="Pourquoi ESE ?" data-en="Why ESE?">Pourquoi ESE ?</p>
+        <h2 data-fr="Un schéma papier devient un outil de compréhension." data-en="Turn a paper schematic into a tool for understanding.">Un schéma papier devient un outil de compréhension.</h2>
+        <p data-fr="Sur un câblage dense, colorer tout en permanence masque précisément ce que l’on cherche. ESE conserve le document original intact et superpose des tracés interactifs : survol temporaire, sélection persistante, repères couleur ou numériques, et continuités dessinées avec précision." data-en="On a dense wiring diagram, permanent colour can hide exactly what you need to see. ESE preserves the original document and overlays interactive traces: temporary hover, persistent selection, colour or numeric references, and precisely drawn continuity.">Sur un câblage dense, colorer tout en permanence masque précisément ce que l’on cherche. ESE conserve le document original intact et superpose des tracés interactifs : survol temporaire, sélection persistante, repères couleur ou numériques, et continuités dessinées avec précision.</p>
+      </div>
+    </section>
+
+    <section id="features" class="section section-dark">
+      <div class="shell">
+        <p class="section-kicker" data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</p>
+        <h2 data-fr="De la source brute au document interactif." data-en="From raw source to interactive document.">De la source brute au document interactif.</h2>
+        <div class="feature-grid">
+          <article><span class="feature-icon">01</span><h3 data-fr="Import polyvalent" data-en="Flexible import">Import polyvalent</h3><p data-fr="Images, photos prises directement par l’appareil et pages choisies dans un PDF." data-en="Images, photos captured directly from the device, and selected pages from a PDF.">Images, photos prises directement par l’appareil et pages choisies dans un PDF.</p></article>
+          <article><span class="feature-icon">02</span><h3 data-fr="Tracés précis" data-en="Precise tracing">Tracés précis</h3><p data-fr="Créez, prolongez, modifiez ou supprimez chaque portion sans perdre le reste du circuit." data-en="Create, extend, edit or remove any segment without losing the rest of the circuit.">Créez, prolongez, modifiez ou supprimez chaque portion sans perdre le reste du circuit.</p></article>
+          <article><span class="feature-icon">03</span><h3 data-fr="Repères libres" data-en="Flexible labels">Repères libres</h3><p data-fr="Couleurs simples, composées, abréviations et numéros : ESE s’adapte à la convention du plan." data-en="Simple or compound colours, abbreviations and numbers: ESE follows the drawing’s convention.">Couleurs simples, composées, abréviations et numéros : ESE s’adapte à la convention du plan.</p></article>
+          <article><span class="feature-icon">04</span><h3 data-fr="OCR assisté" data-en="Assisted OCR">OCR assisté</h3><p data-fr="Analysez une légende ou une zone du document pour proposer automatiquement des repères à valider." data-en="Analyse a legend or document area to suggest labels for your approval.">Analysez une légende ou une zone du document pour proposer automatiquement des repères à valider.</p></article>
+          <article><span class="feature-icon">05</span><h3 data-fr="Navigation tactile" data-en="Touch navigation">Navigation tactile</h3><p data-fr="Zoom, déplacement à deux doigts, mémorisation de la vue par page et mode plein écran." data-en="Pinch zoom, two-finger pan, per-page view memory and full-screen viewing.">Zoom, déplacement à deux doigts, mémorisation de la vue par page et mode plein écran.</p></article>
+          <article><span class="feature-icon">06</span><h3 data-fr="HTML autonome" data-en="Standalone HTML">HTML autonome</h3><p data-fr="Exportez un lecteur consultable dans un navigateur, avec ou sans outils d’édition." data-en="Export a viewer that runs in a browser, with or without editing tools.">Exportez un lecteur consultable dans un navigateur, avec ou sans outils d’édition.</p></article>
+          <article><span class="feature-icon">07</span><h3 data-fr="Partage local par QR" data-en="Local QR sharing">Partage local par QR</h3><p data-fr="Transférez l’export HTML entre appareils sur le réseau local, sans serveur distant." data-en="Transfer an HTML export between devices over the local network, without a remote server.">Transférez l’export HTML entre appareils sur le réseau local, sans serveur distant.</p></article>
+          <article><span class="feature-icon">08</span><h3 data-fr="Reprise automatique" data-en="Automatic recovery">Reprise automatique</h3><p data-fr="Rouvrez le dernier projet au démarrage et récupérez une copie privée après un arrêt imprévu." data-en="Reopen the last project on startup and recover a private copy after an unexpected stop.">Rouvrez le dernier projet au démarrage et récupérez une copie privée après un arrêt imprévu.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads" class="section downloads">
+      <div class="shell">
+        <p class="section-kicker" data-fr="Téléchargements" data-en="Downloads">Téléchargements</p>
+        <h2 data-fr="ESE 0.1.0-beta.1" data-en="ESE 0.1.0-beta.1">ESE 0.1.0-beta.1</h2>
+        <p class="section-lead" data-fr="Première version publique bêta. Choisissez l’édition correspondant à votre appareil." data-en="First public beta. Choose the edition for your device.">Première version publique bêta. Choisissez l’édition correspondant à votre appareil.</p>
+        <div class="download-grid">
+          <article class="download-card featured">
+            <span class="platform">Windows 10/11 · x64</span>
+            <h3 data-fr="Programme d’installation" data-en="Installer">Programme d’installation</h3>
+            <p data-fr="Installation classique dans votre profil utilisateur, avec raccourcis et désinstallation propre." data-en="Standard per-user installation with shortcuts and clean uninstall.">Installation classique dans votre profil utilisateur, avec raccourcis et désinstallation propre.</p>
+            <a class="button primary" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Setup.exe" data-fr="Télécharger l’installateur" data-en="Download installer">Télécharger l’installateur</a>
+          </article>
+          <article class="download-card">
+            <span class="platform">Windows 10/11 · x64</span>
+            <h3 data-fr="Version portable" data-en="Portable edition">Version portable</h3>
+            <p data-fr="Un exécutable unique : copiez-le où vous voulez et lancez-le sans installation." data-en="A single executable: copy it anywhere and run it without installing.">Un exécutable unique : copiez-le où vous voulez et lancez-le sans installation.</p>
+            <a class="button secondary" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Windows-x64-Portable.exe" data-fr="Télécharger le portable" data-en="Download portable">Télécharger le portable</a>
+          </article>
+          <article class="download-card featured">
+            <span class="platform">Android 7.0+ · universel</span>
+            <h3>APK Android</h3>
+            <p data-fr="Une APK signée réunissant ARM 32/64 bits et x86 32/64 bits, à installer directement." data-en="A signed APK supporting 32/64-bit ARM and 32/64-bit x86, ready for direct installation.">Une APK signée réunissant ARM 32/64 bits et x86 32/64 bits, à installer directement.</p>
+            <a class="button primary" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/ESE-Android-Universal.apk" data-fr="Télécharger l’APK" data-en="Download APK">Télécharger l’APK</a>
+          </article>
+          <article class="download-card muted">
+            <span class="platform">Linux</span>
+            <h3 data-fr="En préparation" data-en="In preparation">En préparation</h3>
+            <p data-fr="Le code est portable ; les paquets Linux arriveront après validation sur plusieurs distributions et Raspberry Pi." data-en="The code is portable; Linux packages will follow testing on several distributions and Raspberry Pi.">Le code est portable ; les paquets Linux arriveront après validation sur plusieurs distributions et Raspberry Pi.</p>
+          </article>
+        </div>
+        <div class="release-links">
+          <a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/tag/v0.1.0-beta.1" data-fr="Notes de version" data-en="Release notes">Notes de version</a>
+          <a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.1/SHA256SUMS.txt" data-fr="Sommes SHA-256" data-en="SHA-256 checksums">Sommes SHA-256</a>
+          <a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor" data-fr="Code source" data-en="Source code">Code source</a>
+        </div>
+        <aside class="beta-note">
+          <strong data-fr="Version bêta" data-en="Beta release">Version bêta</strong>
+          <p data-fr="Conservez une copie de vos projets importants. Sur Android, une ancienne alpha signée avec une autre clé doit être désinstallée avant cette version publique." data-en="Keep a copy of important projects. On Android, an older alpha signed with a different key must be uninstalled before installing this public build.">Conservez une copie de vos projets importants. Sur Android, une ancienne alpha signée avec une autre clé doit être désinstallée avant cette version publique.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tutorial" class="section tutorial section-dark">
+      <div class="shell">
+        <p class="section-kicker" data-fr="Tutoriel" data-en="Tutorial">Tutoriel</p>
+        <h2 data-fr="Votre premier schéma interactif, pas à pas." data-en="Your first interactive schematic, step by step.">Votre premier schéma interactif, pas à pas.</h2>
+        <div class="tutorial-step">
+          <div class="step-copy"><span>1</span><h3 data-fr="Créez un projet" data-en="Create a project">Créez un projet</h3><p data-fr="Cliquez sur « Nouveau projet ». Si le document courant a changé, ESE vous propose d’abord de l’enregistrer." data-en="Choose “New project”. If the current document has changed, ESE first offers to save it.">Cliquez sur « Nouveau projet ». Si le document courant a changé, ESE vous propose d’abord de l’enregistrer.</p></div>
+          <figure><img src="assets/screenshots/ese-editor.png" alt="Interface principale d’ESE en mode éditeur" loading="lazy" width="1440" height="970"></figure>
+        </div>
+        <div class="tutorial-step reverse">
+          <div class="step-copy"><span>2</span><h3 data-fr="Importez les pages utiles" data-en="Import the pages you need">Importez les pages utiles</h3><p data-fr="Activez le mode éditeur, puis importez une image, prenez une photo ou sélectionnez une ou plusieurs pages physiques d’un PDF. ESE ne conserve dans le projet que les images rendues, pas le document source complet." data-en="Enable editor mode, then import an image, take a photo, or select one or more physical pages from a PDF. ESE stores only rendered images in the project, not the entire source document.">Activez le mode éditeur, puis importez une image, prenez une photo ou sélectionnez une ou plusieurs pages physiques d’un PDF. ESE ne conserve dans le projet que les images rendues, pas le document source complet.</p></div>
+          <figure><img src="assets/screenshots/ese-viewer.png" alt="Schéma synthétique importé dans ESE" loading="lazy" width="1440" height="970"></figure>
+        </div>
+        <div class="tutorial-columns">
+          <article><span>3</span><h3 data-fr="Créez les repères" data-en="Create labels">Créez les repères</h3><p data-fr="Ajoutez un nom, un numéro ou une abréviation, puis associez-lui une couleur simple ou composée. L’OCR peut proposer une première liste à valider." data-en="Add a name, number or abbreviation, then assign a simple or compound colour. OCR can suggest an initial list for review.">Ajoutez un nom, un numéro ou une abréviation, puis associez-lui une couleur simple ou composée. L’OCR peut proposer une première liste à valider.</p></article>
+          <article><span>4</span><h3 data-fr="Tracez les circuits" data-en="Trace circuits">Tracez les circuits</h3><p data-fr="Choisissez un repère et posez les points sur le fil. Un double clic termine la portion et permet immédiatement d’en ajouter une autre au même circuit." data-en="Choose a label and place points along the wire. Double-click to finish a segment and immediately add another to the same circuit.">Choisissez un repère et posez les points sur le fil. Un double clic termine la portion et permet immédiatement d’en ajouter une autre au même circuit.</p></article>
+          <article><span>5</span><h3 data-fr="Corrigez sans tout refaire" data-en="Correct without starting over">Corrigez sans tout refaire</h3><p data-fr="Sélectionnez une portion existante pour déplacer ses points, l’étendre ou la supprimer. Un croisement n’est continu que si le schéma montre explicitement une jonction." data-en="Select an existing segment to move its points, extend it or remove it. A crossing is continuous only when the source explicitly shows a junction.">Sélectionnez une portion existante pour déplacer ses points, l’étendre ou la supprimer. Un croisement n’est continu que si le schéma montre explicitement une jonction.</p></article>
+          <article><span>6</span><h3 data-fr="Enregistrez en .ese" data-en="Save as .ese">Enregistrez en .ese</h3><p data-fr="Le fichier .ese est une archive ZIP ouverte contenant les pages rendues, les tracés et l’état de navigation. Il s’ouvre de la même manière sur chaque plateforme." data-en="An .ese file is an open ZIP archive containing rendered pages, traces and navigation state. It opens the same way on every platform.">Le fichier .ese est une archive ZIP ouverte contenant les pages rendues, les tracés et l’état de navigation. Il s’ouvre de la même manière sur chaque plateforme.</p></article>
+        </div>
+        <div class="tutorial-step references-step">
+          <div class="step-copy"><span>7</span><h3 data-fr="Testez la lecture" data-en="Test the viewer">Testez la lecture</h3><p data-fr="Désactivez le mode éditeur. Le survol éclaire temporairement un circuit ; un clic le verrouille, et un second clic sur le même circuit le désactive. Le plein écran ne conserve que le schéma et son bouton de sortie." data-en="Disable editor mode. Hover temporarily highlights a circuit; click to lock it, and click it again to clear it. Full screen keeps only the schematic and its exit button.">Désactivez le mode éditeur. Le survol éclaire temporairement un circuit ; un clic le verrouille, et un second clic sur le même circuit le désactive. Le plein écran ne conserve que le schéma et son bouton de sortie.</p></div>
+          <figure><img src="assets/screenshots/ese-references.png" alt="Liste de repères simples, composés et numériques dans ESE" loading="lazy" width="1440" height="970"></figure>
+        </div>
+        <div class="tutorial-step reverse fullscreen-step">
+          <div class="step-copy"><span>8</span><h3 data-fr="Exportez ou partagez" data-en="Export or share">Exportez ou partagez</h3><p data-fr="Choisissez HTML consultation pour éviter les fausses manipulations, ou HTML éditable pour garder les outils. Enregistrez localement ou partagez par QR sur le réseau local : le destinataire n’a besoin que de son navigateur." data-en="Choose view-only HTML to prevent accidental edits, or editable HTML to keep the tools. Save locally or share by QR over the local network: recipients need only their browser.">Choisissez HTML consultation pour éviter les fausses manipulations, ou HTML éditable pour garder les outils. Enregistrez localement ou partagez par QR sur le réseau local : le destinataire n’a besoin que de son navigateur.</p></div>
+          <figure><img src="assets/screenshots/ese-fullscreen.png" alt="Mode plein écran d’ESE montrant uniquement le schéma" loading="lazy" width="1440" height="970"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="formats" class="section formats">
+      <div class="shell formats-grid">
+        <div>
+          <p class="section-kicker" data-fr="Ouvert par conception" data-en="Open by design">Ouvert par conception</p>
+          <h2 data-fr="Vos données restent vos données." data-en="Your data remains yours.">Vos données restent vos données.</h2>
+          <p data-fr="ESE n’invente pas un conteneur opaque. Un projet .ese est une archive ZIP documentée. L’échange JSON expose les repères, circuits, tracés, pages et vues. L’export HTML rassemble le lecteur et les données dans un fichier autonome." data-en="ESE does not hide data in an opaque container. An .ese project is a documented ZIP archive. JSON interchange exposes labels, circuits, traces, pages and views. HTML export bundles the viewer and data into one standalone file.">ESE n’invente pas un conteneur opaque. Un projet .ese est une archive ZIP documentée. L’échange JSON expose les repères, circuits, tracés, pages et vues. L’export HTML rassemble le lecteur et les données dans un fichier autonome.</p>
+          <div class="inline-links"><a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/blob/main/docs/ESE_PROJECT_FORMAT.md">Format .ese</a><a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/blob/main/docs/ESE_JSON_INTERCHANGE.md">JSON</a><a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/blob/main/docs/PRIVACY.md" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a></div>
+        </div>
+        <aside class="format-card">
+          <code>.ese</code><p data-fr="Projet de travail complet, modifiable et multiplateforme." data-en="Complete, editable and cross-platform working project.">Projet de travail complet, modifiable et multiplateforme.</p>
+          <code>.html</code><p data-fr="Document autonome à consulter dans tout navigateur moderne." data-en="Standalone document viewable in any modern browser.">Document autonome à consulter dans tout navigateur moderne.</p>
+          <code>.json</code><p data-fr="Données interopérables pour sauvegarde, échange et automatisation." data-en="Interoperable data for backup, exchange and automation.">Données interopérables pour sauvegarde, échange et automatisation.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section open-source">
+      <div class="shell narrow">
+        <img src="assets/ese-icon.svg" alt="" width="76" height="76" loading="lazy">
+        <h2 data-fr="Un outil utile doit pouvoir servir à tout le monde." data-en="A useful tool should be available to everyone.">Un outil utile doit pouvoir servir à tout le monde.</h2>
+        <p data-fr="ESE est développé publiquement par Nibin Naug et distribué sous licence GNU GPL v3 ou ultérieure. Consultez le code, signalez un problème ou contribuez à la suite." data-en="ESE is developed in public by Nibin Naug and released under the GNU GPL v3 or later. Read the code, report an issue or help build what comes next.">ESE est développé publiquement par Nibin Naug et distribué sous licence GNU GPL v3 ou ultérieure. Consultez le code, signalez un problème ou contribuez à la suite.</p>
+        <a class="button secondary" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor" data-fr="Voir le projet sur GitHub" data-en="View the project on GitHub">Voir le projet sur GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <p>© <span id="year">2026</span> Nibin Naug · ESE — Electrical Schemes Editor</p>
+      <p><a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0-or-later</a> · <a href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/issues" data-fr="Signaler un problème" data-en="Report an issue">Signaler un problème</a></p>
+    </div>
+  </footer>
+</body>
+</html>

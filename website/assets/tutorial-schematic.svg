@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#fbfcfe"/>
+  <g stroke="#e7ecf2" stroke-width="1">
+    <path d="M0 100H1600M0 200H1600M0 300H1600M0 400H1600M0 500H1600M0 600H1600M0 700H1600M0 800H1600M0 900H1600"/>
+    <path d="M100 0V1000M200 0V1000M300 0V1000M400 0V1000M500 0V1000M600 0V1000M700 0V1000M800 0V1000M900 0V1000M1000 0V1000M1100 0V1000M1200 0V1000M1300 0V1000M1400 0V1000M1500 0V1000"/>
+  </g>
+  <g fill="#182230" font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="72" font-size="34" font-weight="700">ESE training schematic</text>
+    <text x="72" y="108" font-size="18" fill="#667085">Synthetic 12 V DC control circuit — documentation sample</text>
+  </g>
+  <g fill="none" stroke="#182230" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M160 280H300"/>
+    <path d="M360 280H520"/>
+    <path d="M620 280H760"/>
+    <path d="M900 280H1080"/>
+    <path d="M1180 280H1370V720"/>
+    <path d="M160 520H300"/>
+    <path d="M420 520H600"/>
+    <path d="M740 520H900"/>
+    <path d="M1020 520H1180V720"/>
+    <path d="M160 720H1370"/>
+    <circle cx="760" cy="280" r="8" fill="#182230"/>
+    <path d="M760 280V390H900"/>
+    <path d="M1020 390H1180V520"/>
+  </g>
+  <g fill="#fbfcfe" stroke="#182230" stroke-width="5">
+    <rect x="100" y="220" width="60" height="120" rx="10"/>
+    <path d="M115 252H145M130 237V267M115 308H145"/>
+    <rect x="300" y="245" width="60" height="70" rx="6"/>
+    <path d="M312 280H348"/>
+    <circle cx="520" cy="280" r="10"/>
+    <circle cx="620" cy="280" r="10"/>
+    <path d="M530 270L605 235"/>
+    <rect x="790" y="230" width="110" height="100" rx="8"/>
+    <path d="M815 305c16-50 44-50 60 0"/>
+    <circle cx="1130" cy="280" r="50"/>
+    <path d="M1095 245L1165 315M1165 245L1095 315"/>
+    <circle cx="300" cy="520" r="10"/>
+    <circle cx="420" cy="520" r="10"/>
+    <path d="M310 510L405 475"/>
+    <rect x="600" y="470" width="140" height="100" rx="8"/>
+    <path d="M620 520c10-30 22-30 32 0s22 30 32 0 22-30 32 0"/>
+    <circle cx="960" cy="520" r="60"/>
+    <text x="934" y="540" font-family="Arial" font-size="54" fill="#182230" stroke="none">M</text>
+    <rect x="900" y="350" width="120" height="80" rx="8"/>
+    <path d="M920 390h80"/>
+  </g>
+  <g fill="#182230" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <text x="97" y="195">B1 · 12 V</text>
+    <text x="298" y="225">F1 · 15 A</text>
+    <text x="535" y="220">S1 · MAIN</text>
+    <text x="802" y="205">K1 · RELAY</text>
+    <text x="1082" y="205">L1 · LAMP</text>
+    <text x="312" y="455">S2 · AUX</text>
+    <text x="615" y="445">F2 · 10 A</text>
+    <text x="920" y="435">M1 · MOTOR</text>
+    <text x="910" y="340">K1 COIL</text>
+  </g>
+  <g fill="#344054" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
+    <rect x="405" y="258" width="66" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="417" y="281">R/B</text>
+    <rect x="665" y="258" width="82" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="675" y="281">Y/GR</text>
+    <rect x="956" y="258" width="50" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="968" y="281">15</text>
+    <rect x="500" y="498" width="52" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="512" y="521">31</text>
+    <rect x="790" y="498" width="62" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="802" y="521">BL</text>
+    <rect x="770" y="698" width="66" height="32" rx="5" fill="#fbfcfe"/>
+    <text x="782" y="721">G/Y</text>
+  </g>
+  <g fill="none" stroke="#182230" stroke-width="5">
+    <path d="M130 720v45M103 765h54M112 780h36M120 795h20"/>
+    <path d="M1180 720v45M1153 765h54M1162 780h36M1170 795h20"/>
+    <path d="M1370 720v45M1343 765h54M1352 780h36M1360 795h20"/>
+  </g>
+  <g fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="18">
+    <text x="72" y="930">Crossings are connected only when a junction dot is shown.</text>
+    <text x="72" y="960">Labels may interrupt a drawn wire without changing its logical reference.</text>
+  </g>
+</svg>

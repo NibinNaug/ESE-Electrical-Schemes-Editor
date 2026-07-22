@@ -1,0 +1,41 @@
+{
+  "name": "ese-electrical-schemes-editor",
+  "private": true,
+  "version": "0.1.0-beta.1",
+  "description": "Turn static electrical schematics into interactive, portable documents.",
+  "author": "Nibin Naug",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://nibin.naug.free.fr/prog/ese/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 1420",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "benchmark:ocr": "node --experimental-strip-types scripts/ocr-benchmark.mjs",
+    "docs:tutorial-project": "node --experimental-strip-types scripts/create-tutorial-project.mjs",
+    "preview": "vite preview --port 4173",
+    "tauri": "tauri",
+    "check:rust": "cargo check --manifest-path src-tauri/Cargo.toml"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.11.1",
+    "@tauri-apps/plugin-dialog": "^2.7.2",
+    "fflate": "^0.8.3",
+    "pdfjs-dist": "^6.1.200",
+    "qrcode": "^1.5.4",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4",
+    "@types/qrcode": "^1.5.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5"
+  }
+}

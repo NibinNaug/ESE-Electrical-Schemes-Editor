@@ -1,0 +1,14 @@
+node_modules/
+dist/
+releases/
+src-tauri/target/
+*.ese
+*.tmp
+.DS_Store
+Thumbs.db
+tests/fixtures/ocr/local-private/
+tmp/
+public/demo/
+scripts/local-private-*
+src-tauri/gen/android/keystore.properties
+website/deploy/

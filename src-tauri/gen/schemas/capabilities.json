@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"Fonctions natives nécessaires au premier jet d’ESE.","local":true,"windows":["main"],"permissions":["core:default","dialog:allow-open","dialog:allow-save"]}}
