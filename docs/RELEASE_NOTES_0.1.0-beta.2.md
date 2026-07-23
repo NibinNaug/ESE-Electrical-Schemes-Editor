@@ -1,6 +1,6 @@
 # ESE 0.1.0-beta.2
 
-This is the first OTA-capable public beta of ESE — Electrical Schemes Editor.
+This is the first OTA-capable public beta of ESE — Electrical Schematics Enlightener.
 
 ## What is new
 

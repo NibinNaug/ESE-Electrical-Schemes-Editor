@@ -4,6 +4,15 @@ All notable public changes to ESE are documented here.
 
 ## Unreleased
 
+## [0.1.0-beta.3] — 2026-07-23
+
+Definitive product name and repository address.
+
+- ESE now expands to **Electrical Schematics Enlightener** throughout the application, documentation, website and release metadata;
+- the canonical repository moves to `NibinNaug/ESE-Electrical-Schematics-Enlightener`;
+- desktop and Android update validation now trusts the new canonical release path;
+- the `ESE` product name, `org.ese.editor` installation identity and `.ese` project format remain unchanged.
+
 ## [0.1.0-beta.2] — 2026-07-23
 
 First OTA-capable public beta.
@@ -30,5 +39,6 @@ First public beta.
 - portable Windows x64 executable, Windows NSIS installer and universal Android APK;
 - no bundled schematic, manual or mandatory online service.
 
-[0.1.0-beta.1]: https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/tag/v0.1.0-beta.1
-[0.1.0-beta.2]: https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/tag/v0.1.0-beta.2
+[0.1.0-beta.1]: https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/tag/v0.1.0-beta.1
+[0.1.0-beta.2]: https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/tag/v0.1.0-beta.2
+[0.1.0-beta.3]: https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/tag/v0.1.0-beta.3

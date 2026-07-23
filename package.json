@@ -1,17 +1,17 @@
 {
-  "name": "ese-electrical-schemes-editor",
+  "name": "ese-electrical-schematics-enlightener",
   "private": true,
-  "version": "0.1.0-beta.2",
-  "description": "Turn static electrical schematics into interactive, portable documents.",
+  "version": "0.1.0-beta.3",
+  "description": "Enlighten static electrical schematics with interactive circuits and portable documents.",
   "author": "Nibin Naug",
   "license": "GPL-3.0-or-later",
   "homepage": "https://nibin-naug.pages-perso.free.fr/prog/ese/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor.git"
+    "url": "git+https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener.git"
   },
   "bugs": {
-    "url": "https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/issues"
+    "url": "https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/issues"
   },
   "type": "module",
   "scripts": {

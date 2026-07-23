@@ -1,4 +1,4 @@
-# ESE — Electrical Schemes Editor
+# ESE — Electrical Schematics Enlightener
 
 <p align="center">
   <img src="assets/branding/ese-icon.svg" alt="ESE application icon" width="160">
@@ -18,23 +18,23 @@ An open, portable and cross-platform-oriented editor for turning static electric
 
 ### Présentation
 
-ESE — **Electrical Schemes Editor** — permet de transformer l’image d’un schéma électrique en document interactif. Les circuits restent invisibles au repos, apparaissent temporairement au survol et restent surlignés après un clic. Un second clic sur le même circuit le désélectionne.
+ESE — **Electrical Schematics Enlightener** — permet de transformer l’image d’un schéma électrique en document interactif. Les circuits restent invisibles au repos, apparaissent temporairement au survol et restent surlignés après un clic. Un second clic sur le même circuit le désélectionne.
 
 Le lecteur et l’éditeur partagent volontairement la même interface : la case **Mode édition** affiche ou masque les outils sans changer de document ni perdre la sélection en cours.
 
-La version publique actuelle est `0.1.0-beta.2`, disponible pour Windows x64 et Android, avec un AppImage Linux x64 expérimental. C’est la première version capable d’installer les mises à jour intégrées : les utilisateurs de `0.1.0-beta.1` doivent donc encore installer cette transition manuellement une fois. Les fichiers `.ese` restent identiques et portables d’une plateforme à l’autre.
+La version publique actuelle est `0.1.0-beta.3`, disponible pour Windows x64 et Android, avec un AppImage Linux x64 expérimental. Elle adopte le nom définitif **Electrical Schematics Enlightener** et la nouvelle adresse du dépôt. Les utilisateurs de `0.1.0-beta.1` ou `0.1.0-beta.2` doivent installer cette transition manuellement une fois ; les mises à jour intégrées reprendront ensuite normalement. Les fichiers `.ese` et l’identité d’installation restent inchangés.
 
 Les versions natives vérifient automatiquement les nouvelles releases GitHub. Les mises à jour Windows/Linux sont signées et installées par Tauri ; Android vérifie l’empreinte de l’APK avant de transmettre l’installation au système. Le fonctionnement et la procédure de publication sont décrits dans [docs/OTA_UPDATES.md](docs/OTA_UPDATES.md).
 
 ### Téléchargements
 
-- [Windows x64 — programme d’installation](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Setup.exe)
-- [Windows x64 — exécutable portable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Portable.exe)
-- [Linux x64 — AppImage expérimental](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Linux-x64.AppImage)
-- [Android 7.0+ — APK universel](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Android-Universal.apk)
-- [Sommes de contrôle SHA-256](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/SHA256SUMS.txt)
+- [Windows x64 — programme d’installation](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Windows-x64-Setup.exe)
+- [Windows x64 — exécutable portable](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Windows-x64-Portable.exe)
+- [Linux x64 — AppImage expérimental](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Linux-x64.AppImage)
+- [Android 7.0+ — APK universel](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Android-Universal.apk)
+- [Sommes de contrôle SHA-256](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/SHA256SUMS.txt)
 
-Les détails d’installation et limitations connues figurent dans les [notes de version](docs/RELEASE_NOTES_0.1.0-beta.2.md).
+Les détails d’installation et limitations connues figurent dans les [notes de version](docs/RELEASE_NOTES_0.1.0-beta.3.md).
 
 ### Fonctionnalités actuelles
 
@@ -244,21 +244,21 @@ Le projet privilégie un format documenté, inspectable et portable, sans chiffr
 
 ### Overview
 
-ESE — **Electrical Schemes Editor** — turns an electrical schematic image into an interactive document. Circuits remain hidden while idle, appear temporarily on hover and stay highlighted after a click. Clicking the same circuit again clears the selection.
+ESE — **Electrical Schematics Enlightener** — turns an electrical schematic image into an interactive document. Circuits remain hidden while idle, appear temporarily on hover and stay highlighted after a click. Clicking the same circuit again clears the selection.
 
-The current public version is `0.1.0-beta.2`, available for Windows x64 and Android, with an experimental Linux x64 AppImage. It is the first build able to install integrated updates, so users of `0.1.0-beta.1` still need to install this transition manually once. `.ese` files remain identical and portable across platforms.
+The current public version is `0.1.0-beta.3`, available for Windows x64 and Android, with an experimental Linux x64 AppImage. It adopts the definitive **Electrical Schematics Enlightener** name and the repository’s new address. Users of `0.1.0-beta.1` or `0.1.0-beta.2` must install this transition manually once; integrated updates will then resume normally. `.ese` files and the installation identity remain unchanged.
 
 Native builds automatically check new GitHub releases. Windows/Linux updates are signed and installed through Tauri; Android verifies the APK digest before handing installation to the operating system. See [docs/OTA_UPDATES.md](docs/OTA_UPDATES.md) for the security model and release procedure.
 
 ### Downloads
 
-- [Windows x64 — installer](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Setup.exe)
-- [Windows x64 — portable executable](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Windows-x64-Portable.exe)
-- [Linux x64 — experimental AppImage](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Linux-x64.AppImage)
-- [Android 7.0+ — universal APK](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/ESE-Android-Universal.apk)
-- [SHA-256 checksums](https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.1.0-beta.2/SHA256SUMS.txt)
+- [Windows x64 — installer](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Windows-x64-Setup.exe)
+- [Windows x64 — portable executable](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Windows-x64-Portable.exe)
+- [Linux x64 — experimental AppImage](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Linux-x64.AppImage)
+- [Android 7.0+ — universal APK](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/ESE-Android-Universal.apk)
+- [SHA-256 checksums](https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.1.0-beta.3/SHA256SUMS.txt)
 
-See the [release notes](docs/RELEASE_NOTES_0.1.0-beta.2.md) for installation details and known limitations.
+See the [release notes](docs/RELEASE_NOTES_0.1.0-beta.3.md) for installation details and known limitations.
 
 ### Current features
 

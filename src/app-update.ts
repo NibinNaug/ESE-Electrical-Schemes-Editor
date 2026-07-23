@@ -2,7 +2,7 @@ import { getVersion } from "@tauri-apps/api/app";
 import { Channel, invoke, isTauri } from "@tauri-apps/api/core";
 import { compareAppVersions, normalizeAppVersion } from "./app-version";
 
-const RELEASES_API = "https://api.github.com/repos/NibinNaug/ESE-Electrical-Schemes-Editor/releases?per_page=30";
+const RELEASES_API = "https://api.github.com/repos/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases?per_page=30";
 const ANDROID_APK_NAME = "ESE-Android-Universal.apk";
 
 type GitHubAsset = {

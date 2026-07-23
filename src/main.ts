@@ -47,7 +47,7 @@ if (!root) throw new Error("Racine d’application absente.");
 root.innerHTML = `
   <div class="app-shell">
     <header class="topbar">
-      <div class="brand"><strong>ESE</strong><span>Electrical Schemes Editor</span></div>
+      <div class="brand"><strong>ESE</strong><span>Electrical Schematics Enlightener</span></div>
       <div class="project-title" id="project-title"></div>
       <div class="toolbar-actions">
         <button id="open-project" type="button">Ouvrir</button>
@@ -353,7 +353,7 @@ root.innerHTML = `
         <div><span>Version disponible</span><strong id="update-available-version"></strong></div>
         <div><span>Publication</span><strong id="update-published-at"></strong></div>
         <p id="update-notes"></p>
-        <a id="update-release-link" href="https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases" target="_blank" rel="noreferrer">Voir la release sur GitHub</a>
+        <a id="update-release-link" href="https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases" target="_blank" rel="noreferrer">Voir la release sur GitHub</a>
       </div>
       <progress id="update-progress" max="1" hidden></progress>
       <p class="dialog-note" id="update-security-note">Les mises à jour desktop sont signées par la clé ESE. Android vérifie l’empreinte téléchargée, puis la signature de l’APK avant remplacement.</p>
