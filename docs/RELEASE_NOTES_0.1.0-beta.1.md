@@ -1,6 +1,6 @@
 # ESE 0.1.0-beta.1
 
-This is the first public beta of ESE — Electrical Schemes Editor.
+This is the first public beta of ESE — Electrical Schematics Enlightener.
 
 ## Downloads
 

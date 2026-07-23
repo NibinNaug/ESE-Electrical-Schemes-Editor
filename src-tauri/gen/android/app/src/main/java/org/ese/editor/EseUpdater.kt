@@ -63,7 +63,7 @@ internal class EseUpdater(private val activity: MainActivity) {
     val uri = Uri.parse(value)
     val trusted = uri.scheme == "https"
       && uri.host == "github.com"
-      && uri.path?.startsWith("/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/") == true
+      && uri.path?.startsWith("/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/") == true
       && uri.lastPathSegment == "ESE-Android-Universal.apk"
       && uri.query == null
       && uri.fragment == null

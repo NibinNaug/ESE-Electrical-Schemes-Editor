@@ -3,12 +3,12 @@
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.site-nav');
   const titleByLanguage = {
-    fr: 'ESE — Electrical Schemes Editor',
-    en: 'ESE — Electrical Schemes Editor',
+    fr: 'ESE — Electrical Schematics Enlightener',
+    en: 'ESE — Electrical Schematics Enlightener',
   };
   const descriptionByLanguage = {
-    fr: 'ESE — Electrical Schemes Editor : transformez vos schémas techniques en documents interactifs, portables et partageables.',
-    en: 'ESE — Electrical Schemes Editor: turn technical drawings into interactive, portable and shareable documents.',
+    fr: 'ESE — Electrical Schematics Enlightener : transformez vos schémas techniques en documents interactifs, portables et partageables.',
+    en: 'ESE — Electrical Schematics Enlightener: turn technical drawings into interactive, portable and shareable documents.',
   };
 
   function setLanguage(language) {

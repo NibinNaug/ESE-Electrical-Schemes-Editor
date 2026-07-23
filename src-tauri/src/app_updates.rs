@@ -4,7 +4,8 @@ use tauri::{ipc::Channel, AppHandle, State};
 use tauri_plugin_updater::{Update, UpdaterExt};
 use url::Url;
 
-const RELEASE_PATH_PREFIX: &str = "/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/";
+const RELEASE_PATH_PREFIX: &str =
+    "/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/";
 
 #[derive(Default)]
 pub struct PendingUpdate(pub Mutex<Option<Update>>);
@@ -121,12 +122,12 @@ mod tests {
     #[test]
     fn only_accepts_the_official_release_manifest() {
         assert!(validated_manifest_endpoint(
-            "https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.2.0/latest.json"
+            "https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.2.0/latest.json"
         )
         .is_ok());
         assert!(validated_manifest_endpoint("https://example.com/latest.json").is_err());
         assert!(validated_manifest_endpoint(
-            "https://github.com/NibinNaug/ESE-Electrical-Schemes-Editor/releases/download/v0.2.0/update.exe"
+            "https://github.com/NibinNaug/ESE-Electrical-Schematics-Enlightener/releases/download/v0.2.0/update.exe"
         )
         .is_err());
     }
