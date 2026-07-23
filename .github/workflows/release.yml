@@ -169,6 +169,39 @@ jobs:
           done | sed 's#  release-assets/#  #' > SHA256SUMS.txt
           test -s SHA256SUMS.txt
           gh release upload "v$VERSION" SHA256SUMS.txt --clobber
+      - name: Normalize updater download URLs
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          mkdir -p release-assets
+          gh release download "v$VERSION" --dir release-assets --pattern latest.json
+          VERSION="$VERSION" node <<'NODE'
+          const fs = require('node:fs');
+
+          const version = process.env.VERSION;
+          const repository = process.env.GITHUB_REPOSITORY;
+          const path = 'release-assets/latest.json';
+          const manifest = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const base = `https://github.com/${repository}/releases/download/v${version}`;
+          const targets = {
+            'windows-x86_64': `ESE_${version}_x64-setup.exe`,
+            'windows-x86_64-nsis': `ESE_${version}_x64-setup.exe`,
+            'linux-x86_64': `ESE_${version}_amd64.AppImage`,
+            'linux-x86_64-appimage': `ESE_${version}_amd64.AppImage`,
+          };
+
+          for (const [platform, asset] of Object.entries(targets)) {
+            if (!manifest.platforms?.[platform]?.signature) {
+              throw new Error(`Missing signed updater platform: ${platform}`);
+            }
+            manifest.platforms[platform].url = `${base}/${asset}`;
+          }
+
+          fs.writeFileSync(path, JSON.stringify(manifest));
+          NODE
+          gh release upload "v$VERSION" release-assets/latest.json --clobber
       - name: Publish completed prerelease
         shell: bash
         env:
